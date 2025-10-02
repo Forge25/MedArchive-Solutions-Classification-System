@@ -1,14 +1,8 @@
-"""
-Test script for Vertex AI endpoint
-Run this to test your deployed model endpoint
-"""
-
 from google.cloud import aiplatform
 
-# TODO: Update these with your values from GCP Console
-PROJECT_ID = "forge-ml-project"  # Replace with your GCP project ID
-ENDPOINT_ID = "2909108755490668544"  # Replace with your endpoint ID (numbers only)
-LOCATION = "us-central1"  # Replace if you used a different region
+PROJECT_ID = "forge-ml-project" 
+ENDPOINT_ID = "2909108755490668544"
+LOCATION = "us-central1"
 
 # Initialize Vertex AI
 print("Initializing Vertex AI...")
@@ -18,7 +12,7 @@ aiplatform.init(project=PROJECT_ID, location=LOCATION)
 print(f"Connecting to endpoint: {ENDPOINT_ID}")
 endpoint = aiplatform.Endpoint(ENDPOINT_ID)
 
-# Test with medical transcriptions
+# Test medical transcriptions
 test_cases = [
     {
         "text": "Patient presents with chest pain and shortness of breath. ECG shows ST elevation. Troponin levels elevated. Diagnosis: acute myocardial infarction. Started on aspirin, beta blocker, and heparin drip.",
@@ -61,14 +55,3 @@ for i, test_case in enumerate(test_cases, 1):
 
     except Exception as e:
         print(f"\n❌ ERROR: {e}")
-
-print("\n" + "=" * 80)
-print("TESTING COMPLETED")
-print("=" * 80)
-print("\n📸 IMPORTANT: Take a screenshot of this output for your report!")
-print("\nDeployment verification:")
-print(f"  ✓ Model deployed to Vertex AI Endpoint")
-print(f"  ✓ Endpoint ID: {ENDPOINT_ID}")
-print(f"  ✓ Successfully processed medical transcription text")
-print(f"  ✓ Returned predicted medical specialty classification")
-print("\n" + "=" * 80)
